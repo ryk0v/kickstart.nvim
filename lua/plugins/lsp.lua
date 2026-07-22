@@ -117,6 +117,133 @@ do
     -- But for many setups, the LSP (`ts_ls`) will work just fine
     -- ts_ls = {},
 
+    vtsls = {
+      settings = {
+        complete_function_calls = true,
+
+        vtsls = {
+          autoUseWorkspaceTsdk = true,
+          enableMoveToFileCodeAction = true,
+
+          experimental = {
+            maxInlayHintLength = 30,
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+
+        typescript = {
+          updateImportsOnFileMove = {
+            enabled = 'always',
+          },
+
+          tsserver = {
+            maxTsServerMemory = 8192,
+          },
+
+          referencesCodeLens = {
+            enabled = true,
+            showOnAllFunctions = true,
+          },
+
+          implementationsCodeLens = {
+            enabled = true,
+          },
+
+          suggest = {
+            completeFunctionCalls = true,
+          },
+
+          inlayHints = {
+            parameterNames = {
+              enabled = 'literals',
+            },
+            parameterTypes = {
+              enabled = true,
+            },
+            functionLikeReturnTypes = {
+              enabled = true,
+            },
+            propertyDeclarationTypes = {
+              enabled = true,
+            },
+            enumMemberValues = {
+              enabled = true,
+            },
+            variableTypes = {
+              enabled = false,
+            },
+          },
+
+          preferences = {
+            importModuleSpecifier = 'shortest',
+            importModuleSpecifierEnding = 'auto',
+            includePackageJsonAutoImports = 'on',
+            quoteStyle = 'single',
+            includeCompletionsForModuleExports = true,
+            includeCompletionsForImportStatements = true,
+            preferTypeOnlyAutoImports = true,
+            useAliasesForRenames = true,
+            renameShorthandProperties = true,
+            autoImportFileExcludePatterns = {
+              '**/dist/**',
+              '**/node_modules/@mui/**/*/*',
+            },
+          },
+
+          format = {
+            enable = false,
+          },
+        },
+
+        javascript = {
+          updateImportsOnFileMove = {
+            enabled = 'always',
+          },
+
+          suggest = {
+            completeFunctionCalls = true,
+          },
+
+          inlayHints = {
+            parameterNames = {
+              enabled = 'literals',
+            },
+            parameterTypes = {
+              enabled = true,
+            },
+            functionLikeReturnTypes = {
+              enabled = true,
+            },
+            propertyDeclarationTypes = {
+              enabled = true,
+            },
+            enumMemberValues = {
+              enabled = true,
+            },
+            variableTypes = {
+              enabled = false,
+            },
+          },
+
+          preferences = {
+            importModuleSpecifier = 'shortest',
+            importModuleSpecifierEnding = 'auto',
+            quoteStyle = 'single',
+            includeCompletionsForModuleExports = true,
+            includeCompletionsForImportStatements = true,
+            useAliasesForRenames = true,
+            renameShorthandProperties = true,
+          },
+
+          format = {
+            enable = false,
+          },
+        },
+      },
+    },
+
     stylua = {}, -- Used to format Lua code
 
     -- Special Lua Config, as recommended by neovim help docs
@@ -174,6 +301,7 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'vtsls',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -183,4 +311,3 @@ do
     vim.lsp.enable(name)
   end
 end
-
