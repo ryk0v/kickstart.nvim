@@ -8,12 +8,14 @@ vim.pack.add {
 }
 
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>', { desc = 'NeoTree toggle', silent = true })
+vim.keymap.set('n', '\\', '<Cmd>Neotree toggle<CR>', { desc = 'NeoTree open', silent = true })
 
 require('neo-tree').setup {
   filesystem = {
     window = {
       mappings = {
         ['\\'] = 'close_window',
+        ['<leader>e'] = 'close_window',
       },
     },
   },
